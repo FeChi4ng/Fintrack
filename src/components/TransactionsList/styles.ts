@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Container = styled.main`
   flex: 1;
@@ -546,5 +547,19 @@ export const EmptyState = styled.div`
   span {
     color: #9ca3af;
     font-size: 14px;
+  }
+`;
+
+export const ViewAllLink = styled(Link)`
+  color: #2563eb;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+
+  transition: 0.2s;
+
+  &:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
   }
 `;

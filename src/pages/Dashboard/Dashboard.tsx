@@ -4,6 +4,7 @@ import TransactionsList from "../../components/TransactionsList/TransactionsList
 import type { TransactionType } from "../../types/transaction";
 import TransactionModal from "../../components/TransactionModal/TransactionModal";
 import FinanceChart from "../../components/FinanceChart/FinanceChart";
+import { useTransactionForm } from "../../hooks/useTransactionForm";
 
 import ExpenseCategoryChart from "../../components/ExpenseCategoryChart/ExpenseCategoryChart";
 import { useTransactions } from "../../contexts/TransactionsContext/useTransactions";
@@ -17,8 +18,7 @@ import {
 } from "./styles";
 
 function Dashboard() {
-  const { transactions, addTransaction, updateTransaction, deleteTransaction } =
-    useTransactions();
+  const { transactions, deleteTransaction } = useTransactions();
 
   const [search, setSearch] = useState("");
 
@@ -28,72 +28,29 @@ function Dashboard() {
 
   const [filterCategory, setFilterCategory] = useState("all");
 
-  const [editingTransactionId, setEditingTransactionId] = useState<
-    number | null
-  >(null);
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const [description, setDescription] = useState("");
-  const [value, setValue] = useState("");
-  const [category, setCategory] = useState("");
-  const [transactionType, setTransactionType] = useState<"income" | "expense">(
-    "expense"
-  );
-
-  function handleAddTransaction(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    if (!description || !value || !category) {
-      return;
-    }
-
-    if (editingTransactionId !== null) {
-      const transactionToUpdate = transactions.find(
-        (transaction) => transaction.id === editingTransactionId
-      );
-
-      if (transactionToUpdate) {
-        updateTransaction({
-          ...transactionToUpdate,
-          title: description,
-          category,
-          value: Number(value),
-          type: transactionType,
-        });
-      }
-    } else {
-      const newTransaction: TransactionType = {
-        id: Date.now(),
-        title: description,
-        category,
-        date: new Date().toLocaleDateString("pt-BR"),
-        value: Number(value),
-        type: transactionType,
-      };
-
-      addTransaction(newTransaction);
-    }
-
-    setDescription("");
-    setValue("");
-    setCategory("");
-    setTransactionType("expense");
-    setEditingTransactionId(null);
-    setIsModalOpen(false);
-  }
+  const {
+    isModalOpen,
+    description,
+    value,
+    category,
+    transactionType,
+    editingTransactionId,
+    setDescription,
+    setValue,
+    setCategory,
+    setTransactionType,
+    prepareTransactionForEdit,
+    handleSubmit,
+    openNewTransactionModal,
+    closeModal,
+  } = useTransactionForm();
 
   function handleDeleteTransaction(id: number) {
     deleteTransaction(id);
   }
 
   function handleEditTransaction(transaction: TransactionType) {
-    setEditingTransactionId(transaction.id);
-    setDescription(transaction.title);
-    setValue(String(transaction.value));
-    setCategory(transaction.category);
-    setTransactionType(transaction.type);
-    setIsModalOpen(true);
+    prepareTransactionForEdit(transaction);
   }
 
   const totalIncome = transactions
@@ -115,16 +72,7 @@ function Dashboard() {
           <p>Acompanhe suas finanças de forma simples e organizada.</p>
         </HeaderContent>
 
-        <AddButton
-          onClick={() => {
-            setEditingTransactionId(null);
-            setDescription("");
-            setValue("");
-            setCategory("");
-            setTransactionType("expense");
-            setIsModalOpen(true);
-          }}
-        >
+        <AddButton onClick={openNewTransactionModal}>
           + Nova transação
         </AddButton>
       </Header>
@@ -164,11 +112,8 @@ function Dashboard() {
         onValueChange={setValue}
         onCategoryChange={setCategory}
         onTransactionTypeChange={setTransactionType}
-        onClose={() => {
-          setIsModalOpen(false);
-          setEditingTransactionId(null);
-        }}
-        onSubmit={handleAddTransaction}
+        onClose={closeModal}
+        onSubmit={handleSubmit}
       />
     </Container>
   );

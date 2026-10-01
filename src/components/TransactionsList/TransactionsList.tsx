@@ -29,6 +29,7 @@ import {
   EditButton,
   DeleteButton,
   EmptyState,
+  ViewAllLink,
 } from "./styles";
 
 type TransactionsListProps = {
@@ -41,6 +42,9 @@ type TransactionsListProps = {
   onFilterCategoryChange: (category: string) => void;
   onEdit: (transaction: TransactionType) => void;
   onDelete: (id: number) => void;
+  title?: string;
+  description?: string;
+  showViewAll?: boolean;
 };
 
 function getTransactionIcon(category: string) {
@@ -70,6 +74,9 @@ function TransactionsList({
   onFilterCategoryChange,
   onEdit,
   onDelete,
+  title = "Transações recentes",
+  description = "Acompanhe suas últimas movimentações.",
+  showViewAll = true,
 }: TransactionsListProps) {
   const filteredTransactions = transactions.filter((transaction) => {
     const matchesSearch = transaction.title
@@ -88,11 +95,11 @@ function TransactionsList({
     <TransactionsSection>
       <TransactionsHeader>
         <div>
-          <h2>Transações recentes</h2>
-          <p>Acompanhe suas últimas movimentações.</p>
+          <h2>{title}</h2>
+          <p>{description}</p>
         </div>
 
-        <button>Ver todas</button>
+        {showViewAll && <ViewAllLink to="/transacoes">Ver todas</ViewAllLink>}
       </TransactionsHeader>
 
       <TransactionsFilters>
