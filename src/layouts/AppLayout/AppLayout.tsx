@@ -1,15 +1,13 @@
 import { useState } from "react";
+
 import { Menu } from "lucide-react";
+import { Outlet } from "react-router-dom";
 
 import Sidebar from "../../components/Sidebar/Sidebar";
 
 import { LayoutContainer, MenuButton } from "./styles";
 
-type AppLayoutProps = {
-  children: React.ReactNode;
-};
-
-function AppLayout({ children }: AppLayoutProps) {
+function AppLayout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
@@ -24,7 +22,7 @@ function AppLayout({ children }: AppLayoutProps) {
 
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
 
-      {children}
+      <Outlet />
     </LayoutContainer>
   );
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SummaryCards from "../../components/SummaryCards/SummaryCards";
 import TransactionsList from "../../components/TransactionsList/TransactionsList";
 import type { TransactionType } from "../../types/transaction";
@@ -6,6 +6,7 @@ import TransactionModal from "../../components/TransactionModal/TransactionModal
 import FinanceChart from "../../components/FinanceChart/FinanceChart";
 
 import ExpenseCategoryChart from "../../components/ExpenseCategoryChart/ExpenseCategoryChart";
+import { useTransactions } from "../../contexts/TransactionsContext/useTransactions";
 
 import {
   Container,
@@ -15,34 +16,10 @@ import {
   ChartsGrid,
 } from "./styles";
 
-const initialTransactions: TransactionType[] = [
-  {
-    id: 1,
-    title: "Salário",
-    category: "Receita",
-    date: "25 Set 2026",
-    value: 3500,
-    type: "income",
-  },
-  {
-    id: 2,
-    title: "Supermercado",
-    category: "Alimentação",
-    date: "24 Set 2026",
-    value: 285.4,
-    type: "expense",
-  },
-  {
-    id: 3,
-    title: "Aluguel",
-    category: "Moradia",
-    date: "20 Set 2026",
-    value: 1200,
-    type: "expense",
-  },
-];
-
 function Dashboard() {
+  const { transactions, addTransaction, updateTransaction, deleteTransaction } =
+    useTransactions();
+
   const [search, setSearch] = useState("");
 
   const [filterType, setFilterType] = useState<"all" | "income" | "expense">(
@@ -57,26 +34,12 @@ function Dashboard() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [transactions, setTransactions] = useState<TransactionType[]>(() => {
-    const savedTransactions = localStorage.getItem("fintrack-transactions");
-
-    if (savedTransactions) {
-      return JSON.parse(savedTransactions);
-    }
-
-    return initialTransactions;
-  });
-
   const [description, setDescription] = useState("");
   const [value, setValue] = useState("");
   const [category, setCategory] = useState("");
   const [transactionType, setTransactionType] = useState<"income" | "expense">(
     "expense"
   );
-
-  useEffect(() => {
-    localStorage.setItem("fintrack-transactions", JSON.stringify(transactions));
-  }, [transactions]);
 
   function handleAddTransaction(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -86,19 +49,19 @@ function Dashboard() {
     }
 
     if (editingTransactionId !== null) {
-      setTransactions((currentTransactions) =>
-        currentTransactions.map((transaction) =>
-          transaction.id === editingTransactionId
-            ? {
-                ...transaction,
-                title: description,
-                category,
-                value: Number(value),
-                type: transactionType,
-              }
-            : transaction
-        )
+      const transactionToUpdate = transactions.find(
+        (transaction) => transaction.id === editingTransactionId
       );
+
+      if (transactionToUpdate) {
+        updateTransaction({
+          ...transactionToUpdate,
+          title: description,
+          category,
+          value: Number(value),
+          type: transactionType,
+        });
+      }
     } else {
       const newTransaction: TransactionType = {
         id: Date.now(),
@@ -109,10 +72,7 @@ function Dashboard() {
         type: transactionType,
       };
 
-      setTransactions((currentTransactions) => [
-        newTransaction,
-        ...currentTransactions,
-      ]);
+      addTransaction(newTransaction);
     }
 
     setDescription("");
@@ -124,11 +84,7 @@ function Dashboard() {
   }
 
   function handleDeleteTransaction(id: number) {
-    const updatedTransactions = transactions.filter(
-      (transaction) => transaction.id !== id
-    );
-
-    setTransactions(updatedTransactions);
+    deleteTransaction(id);
   }
 
   function handleEditTransaction(transaction: TransactionType) {

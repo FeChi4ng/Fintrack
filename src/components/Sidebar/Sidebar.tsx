@@ -37,22 +37,22 @@ function Sidebar({ isOpen, onClose }: SidebarProps) {
         </Logo>
 
         <Navigation>
-          <NavItem $active>
+          <NavItem to="/" end>
             <LayoutDashboard size={20} />
             Dashboard
           </NavItem>
 
-          <NavItem>
+          <NavItem to="/transacoes">
             <ArrowLeftRight size={20} />
             Transações
           </NavItem>
 
-          <NavItem>
+          <NavItem to="/relatorios">
             <ChartNoAxesCombined size={20} />
             Relatórios
           </NavItem>
 
-          <NavItem>
+          <NavItem to="/configuracoes">
             <Settings size={20} />
             Configurações
           </NavItem>

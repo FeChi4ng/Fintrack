@@ -1,5 +1,5 @@
 import styled from "styled-components";
-3;
+import { NavLink } from "react-router-dom";
 
 type ContainerProps = {
   $isOpen: boolean;
@@ -47,13 +47,8 @@ export const Navigation = styled.nav`
   gap: 8px;
 `;
 
-type NavItemProps = {
-  $active?: boolean;
-};
-
-export const NavItem = styled.button<NavItemProps>`
+export const NavItem = styled(NavLink)`
   width: 100%;
-
   display: flex;
   align-items: center;
   gap: 12px;
@@ -63,18 +58,22 @@ export const NavItem = styled.button<NavItemProps>`
   border: 0;
   border-radius: 10px;
 
-  background: ${({ $active }) => ($active ? "#2563eb" : "transparent")};
-
-  color: ${({ $active }) => ($active ? "#ffffff" : "#9ca3af")};
+  background: transparent;
+  color: #9ca3af;
 
   text-align: left;
   font-weight: 500;
+  text-decoration: none;
 
   transition: 0.2s;
 
   &:hover {
-    background: ${({ $active }) => ($active ? "#2563eb" : "#1f2937")};
+    background: #1f2937;
+    color: #ffffff;
+  }
 
+  &.active {
+    background: #2563eb;
     color: #ffffff;
   }
 `;
