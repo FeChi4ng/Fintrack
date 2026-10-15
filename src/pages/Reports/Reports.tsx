@@ -74,6 +74,11 @@ export function Reports() {
 
   const balance = totalIncome - totalExpenses;
 
+  const periodLabel =
+    selectedPeriod === "all"
+      ? "Todos os períodos"
+      : `Período: ${selectedPeriod}`;
+
   const monthlyEvolutionData = getMonthlyEvolution(transactions);
 
   return (
@@ -113,6 +118,7 @@ export function Reports() {
         balance={balance}
         totalIncome={totalIncome}
         totalExpenses={totalExpenses}
+        periodLabel={periodLabel}
       />
 
       <ChartsSection>

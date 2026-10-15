@@ -33,12 +33,12 @@ export const HeaderContent = styled.div`
   h1 {
     margin-top: 6px;
     font-size: 32px;
-    color: #111827;
+    color: ${({ theme }) => theme.colors.text};
   }
 
   p {
     margin-top: 8px;
-    color: #6b7280;
+    color: ${({ theme }) => theme.colors.textSecondary};
   }
 `;
 
@@ -48,7 +48,7 @@ export const AddButton = styled.button`
   border: 0;
   border-radius: 10px;
 
-  background: #2563eb;
+  background: ${({ theme }) => theme.colors.primary};
   color: #ffffff;
 
   font-weight: 600;

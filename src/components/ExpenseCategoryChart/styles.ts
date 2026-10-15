@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const ChartContainer = styled.section`
   padding: 24px;
 
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
+  background: ${({ theme }) => theme.colors.background};
+  border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 16px;
 
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
@@ -14,13 +14,13 @@ export const ChartHeader = styled.div`
   margin-bottom: 16px;
 
   h2 {
-    color: #111827;
+    color: ${({ theme }) => theme.colors.text};
     font-size: 18px;
   }
 
   p {
     margin-top: 4px;
-    color: #9ca3af;
+    color: ${({ theme }) => theme.colors.textSecondary};
     font-size: 13px;
   }
 `;
@@ -49,7 +49,7 @@ export const LegendItem = styled.div`
   }
 
   strong {
-    color: #374151;
+    color: ${({ theme }) => theme.colors.text};
     font-weight: 600;
   }
 `;

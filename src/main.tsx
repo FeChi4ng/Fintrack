@@ -1,18 +1,16 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import App from "./App.tsx";
-import { GlobalStyles } from "./styles/GlobalStyles";
 import { BrowserRouter } from "react-router-dom";
 
-import { TransactionsProvider } from "./contexts/TransactionsContext/TransactionsContext";
+import { AppThemeProvider } from "./contexts/ThemeContext/ThemeContext";
+import { ThemeContent } from "./ThemeContent";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
-      <TransactionsProvider>
-        <GlobalStyles />
-        <App />
-      </TransactionsProvider>
+      <AppThemeProvider>
+        <ThemeContent />
+      </AppThemeProvider>
     </BrowserRouter>
   </StrictMode>
 );

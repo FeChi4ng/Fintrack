@@ -71,12 +71,9 @@ export const ModalOverlay = styled.div`
 export const Modal = styled.div`
   width: 100%;
   max-width: 500px;
-
   padding: 28px;
-
-  background: #ffffff;
+  background: ${({ theme }) => theme.colors.surface};
   border-radius: 16px;
-
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
 
   @media (max-width: 650px) {
@@ -95,14 +92,14 @@ export const ModalHeader = styled.div`
   margin-bottom: 24px;
 
   h2 {
-    color: #111827;
+    color: ${({ theme }) => theme.colors.text};
     font-size: 22px;
   }
 
   p {
     margin-top: 6px;
 
-    color: #6b7280;
+    color: ${({ theme }) => theme.colors.textSecondary};
     font-size: 14px;
   }
 `;
@@ -115,17 +112,24 @@ export const CloseButton = styled.button`
   align-items: center;
   justify-content: center;
 
-  border: 0;
+  border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 8px;
 
-  background: #f3f4f6;
-  color: #6b7280;
+  background: ${({ theme }) => theme.colors.surface};
+  color: ${({ theme }) => theme.colors.textSecondary};
 
+  cursor: pointer;
   transition: 0.2s;
 
   &:hover {
-    background: #e5e7eb;
-    color: #111827;
+    background: ${({ theme }) => theme.colors.background};
+    color: ${({ theme }) => theme.colors.text};
+    border-color: ${({ theme }) => theme.colors.primary};
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors.primary};
+    outline-offset: 2px;
   }
 `;
 
@@ -143,7 +147,7 @@ export const FormGroup = styled.div`
   gap: 8px;
 
   label {
-    color: #374151;
+    color: ${({ theme }) => theme.colors.textSecondary};
     font-size: 14px;
     font-weight: 600;
   }
@@ -155,11 +159,11 @@ export const FormGroup = styled.div`
 
     padding: 0 14px;
 
-    border: 1px solid #d1d5db;
+    border: 1px solid ${({ theme }) => theme.colors.border};
     border-radius: 10px;
 
-    background: #ffffff;
-    color: #111827;
+    background: ${({ theme }) => theme.colors.background};
+    color: ${({ theme }) => theme.colors.text};
 
     outline: none;
 
@@ -202,22 +206,24 @@ export const TypeButton = styled.button<TypeButtonProps>`
   gap: 8px;
 
   border: 1px solid
-    ${({ $active, $type }) => {
-      if (!$active) return "#d1d5db";
+    ${({ $active, $type, theme }) => {
+      if (!$active) return theme.colors.border;
 
       return $type === "income" ? "#16a34a" : "#dc2626";
     }};
 
   border-radius: 10px;
 
-  background: ${({ $active, $type }) => {
-    if (!$active) return "#ffffff";
+  background: ${({ $active, $type, theme }) => {
+    if (!$active) return theme.colors.background;
 
-    return $type === "income" ? "#dcfce7" : "#fee2e2";
+    return $type === "income"
+      ? "rgba(22, 163, 74, 0.12)"
+      : "rgba(220, 38, 38, 0.12)";
   }};
 
-  color: ${({ $active, $type }) => {
-    if (!$active) return "#6b7280";
+  color: ${({ $active, $type, theme }) => {
+    if (!$active) return theme.colors.text;
 
     return $type === "income" ? "#16a34a" : "#dc2626";
   }};
@@ -234,17 +240,37 @@ export const TypeButton = styled.button<TypeButtonProps>`
 export const SubmitButton = styled.button`
   height: 48px;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   border: 0;
   border-radius: 10px;
 
-  background: #2563eb;
+  background: ${({ theme }) => theme.colors.primary};
   color: #ffffff;
 
+  font-size: 14px;
   font-weight: 600;
 
+  cursor: pointer;
   transition: 0.2s;
 
   &:hover {
-    background: #1d4ed8;
+    filter: brightness(0.9);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors.primary};
+    outline-offset: 3px;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
   }
 `;

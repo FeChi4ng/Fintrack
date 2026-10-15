@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const ChartContainer = styled.div`
   width: 100%;
   min-width: 0;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
+  background: ${({ theme }) => theme.colors.surface};
+  border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 12px;
   padding: 24px;
 `;
@@ -13,13 +13,13 @@ export const ChartHeader = styled.div`
   margin-bottom: 24px;
 
   h2 {
-    color: #111827;
+    color: ${({ theme }) => theme.colors.text};
     font-size: 18px;
     font-weight: 600;
   }
 
   p {
-    color: #6b7280;
+    color: ${({ theme }) => theme.colors.textSecondary};
     font-size: 13px;
     margin-top: 4px;
   }

@@ -9,8 +9,10 @@ export const GlobalStyles = createGlobalStyle`
 
   body {
     font-family: Arial, Helvetica, sans-serif;
-    background: #f5f7fa;
-    color: #1f2937;
+    background: ${({ theme }) => theme.colors.background};
+    color: ${({ theme }) => theme.colors.text};
+
+    transition: background 0.3s ease, color 0.3s ease;
   }
 
   button,

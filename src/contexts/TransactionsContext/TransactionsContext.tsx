@@ -1,21 +1,11 @@
-import { createContext, useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
 import type { TransactionType } from "../../types/transaction";
-
-type TransactionsContextType = {
-  transactions: TransactionType[];
-  addTransaction: (transaction: TransactionType) => void;
-  updateTransaction: (transaction: TransactionType) => void;
-  deleteTransaction: (id: number) => void;
-};
+import { TransactionsContext } from "./transactionsContextDefinition";
 
 type TransactionsProviderProps = {
   children: ReactNode;
 };
-
-export const TransactionsContext = createContext<
-  TransactionsContextType | undefined
->(undefined);
 
 export function TransactionsProvider({ children }: TransactionsProviderProps) {
   const [transactions, setTransactions] = useState<TransactionType[]>(() => {

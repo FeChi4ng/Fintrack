@@ -19,8 +19,8 @@ export const CardsContainer = styled.section`
 export const Card = styled.article`
   padding: 24px;
 
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
+  background: ${({ theme }) => theme.colors.background};
+  border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 16px;
 
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
@@ -29,7 +29,7 @@ export const Card = styled.article`
     display: block;
     margin-top: 8px;
 
-    color: #9ca3af;
+    color: ${({ theme }) => theme.colors.textSecondary};
     font-size: 13px;
   }
 `;
@@ -42,7 +42,7 @@ export const CardHeader = styled.div`
   margin-bottom: 16px;
 
   span {
-    color: #6b7280;
+    color: ${({ theme }) => theme.colors.textSecondary};
     font-size: 14px;
     font-weight: 500;
   }
@@ -51,7 +51,7 @@ export const CardHeader = styled.div`
 export const CardValue = styled.strong`
   display: block;
 
-  color: #111827;
+  color: ${({ theme }) => theme.colors.text};
   font-size: 28px;
   font-weight: 700;
 `;

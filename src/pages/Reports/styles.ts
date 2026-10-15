@@ -2,15 +2,17 @@ import styled from "styled-components";
 
 export const Container = styled.main`
   width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 
   @media (max-width: 768px) {
-    padding-top: 80px;
+    padding: 80px 20px 24px;
   }
 `;
 
 export const Header = styled.header`
   span {
-    color: #2563eb;
+    color: ${({ theme }) => theme.colors.primary};
     font-size: 14px;
     font-weight: 600;
   }
@@ -18,12 +20,12 @@ export const Header = styled.header`
   h1 {
     margin-top: 4px;
     font-size: 28px;
-    color: #111827;
+    color: ${({ theme }) => theme.colors.text};
   }
 
   p {
     margin-top: 6px;
-    color: #6b7280;
+    color: ${({ theme }) => theme.colors.textSecondary};
     font-size: 14px;
   }
 `;
@@ -36,7 +38,7 @@ export const PeriodFilter = styled.div`
   width: 220px;
 
   label {
-    color: #374151;
+    color: ${({ theme }) => theme.colors.textSecondary};
     font-size: 13px;
     font-weight: 600;
   }
@@ -47,18 +49,23 @@ export const PeriodFilter = styled.div`
 
     padding: 0 12px;
 
-    border: 1px solid #d1d5db;
+    border: 1px solid ${({ theme }) => theme.colors.border};
     border-radius: 8px;
 
-    background: #ffffff;
-    color: #111827;
-    font-size: 14px;
+    background: ${({ theme }) => theme.colors.surface};
+    color: ${({ theme }) => theme.colors.text};
 
+    font-size: 14px;
     outline: none;
     cursor: pointer;
 
     &:focus {
-      border-color: #2563eb;
+      border-color: ${({ theme }) => theme.colors.primary};
+    }
+
+    option {
+      background: ${({ theme }) => theme.colors.surface};
+      color: ${({ theme }) => theme.colors.text};
     }
   }
 

@@ -1,75 +1,94 @@
-# React + TypeScript + Vite
+# 💙 FinTrack
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicação web de controle financeiro pessoal, desenvolvida para facilitar o acompanhamento de receitas, despesas e saldo disponível.
 
-Currently, two official plugins are available:
+O FinTrack oferece uma interface moderna, responsiva e intuitiva, permitindo visualizar informações financeiras por meio de gráficos, filtros e relatórios.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Funcionalidades
 
-## React Compiler
+- Dashboard com resumo financeiro
+- Cadastro, edição e exclusão de transações
+- Organização de receitas e despesas por categorias
+- Listagem de transações com filtros
+- Gráficos para análise financeira
+- Relatórios de receitas e despesas
+- Exportação de transações em CSV
+- Alternância entre temas claro e escuro
+- Armazenamento local dos dados com localStorage
+- Interface responsiva para desktop e dispositivos móveis
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tecnologias utilizadas
 
-## Expanding the ESLint configuration
+- React
+- TypeScript
+- Vite
+- Styled Components
+- React Router DOM
+- Recharts
+- Lucide React
+- Context API
+- ESLint
+- Git e GitHub
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 📱 Responsividade
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+O FinTrack foi desenvolvido com foco na experiência do usuário, oferecendo uma interface adaptada para diferentes tamanhos de tela.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+A aplicação conta com navegação responsiva e suporte a dispositivos móveis.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 💻 Como executar o projeto
 
+### Pré-requisitos
+
+- Node.js
+- npm
+
+### Instalação
+
+Clone o repositório:
+
+```bash
+git clone https://github.com/SEU-USUARIO/fintrack.git
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Entre na pasta do projeto:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+cd fintrack
 ```
+
+Instale as dependências:
+
+```bash
+npm install
+```
+
+Inicie o servidor de desenvolvimento:
+
+```bash
+npm run dev
+```
+
+Abra no navegador o endereço informado pelo Vite.
+
+## 📊 Imagens do projeto
+
+As capturas de tela do Dashboard, das transações e dos relatórios serão adicionadas após a preparação das imagens.
+
+## 🌐 Demonstração
+
+O link da aplicação publicada será adicionado após o deploy.
+
+## 📌 Sobre o projeto
+
+O FinTrack foi desenvolvido como projeto de portfólio, com o objetivo de aplicar conhecimentos em desenvolvimento Front-end, componentização, gerenciamento de estado, tipagem com TypeScript e criação de interfaces responsivas.
+
+Os dados são armazenados localmente no navegador, sem necessidade de cadastro ou conexão com um servidor.
+
+## 👨‍💻 Desenvolvedor
+
+**Felipe Chiang**
+
+Desenvolvedor Front-end
+
+GitHub: https://github.com/FeChi4ng

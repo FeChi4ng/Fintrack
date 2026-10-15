@@ -13,18 +13,20 @@ type SummaryCardsProps = {
   balance: number;
   totalIncome: number;
   totalExpenses: number;
+  periodLabel?: string;
 };
 
 function SummaryCards({
   balance,
   totalIncome,
   totalExpenses,
+  periodLabel,
 }: SummaryCardsProps) {
   return (
     <CardsContainer>
       <Card>
         <CardHeader>
-          <span>Saldo total</span>
+          <span>{periodLabel ? "Saldo do período" : "Saldo total"}</span>
 
           <CardIcon $variant="balance">
             <Wallet size={20} />
@@ -32,7 +34,8 @@ function SummaryCards({
         </CardHeader>
 
         <CardValue>{formatCurrency(balance)}</CardValue>
-        <small>Saldo disponível</small>
+
+        <small>{periodLabel || "Saldo disponível"}</small>
       </Card>
 
       <Card>
@@ -45,7 +48,7 @@ function SummaryCards({
         </CardHeader>
 
         <CardValue>{formatCurrency(totalIncome)}</CardValue>
-        <small>Este mês</small>
+        <small>{periodLabel || "Este mês"}</small>
       </Card>
 
       <Card>
@@ -58,7 +61,7 @@ function SummaryCards({
         </CardHeader>
 
         <CardValue>{formatCurrency(totalExpenses)}</CardValue>
-        <small>Este mês</small>
+        <small>{periodLabel || "Este mês"}</small>
       </Card>
     </CardsContainer>
   );

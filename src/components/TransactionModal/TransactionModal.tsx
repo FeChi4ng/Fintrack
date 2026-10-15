@@ -1,5 +1,6 @@
 import { TrendingUp, TrendingDown, X } from "lucide-react";
 import { categories } from "../../constants/categories";
+import { CategorySelect } from "../CategorySelect/CategorySelect";
 
 import {
   ModalOverlay,
@@ -71,6 +72,9 @@ function TransactionModal({
               placeholder="Ex: Supermercado"
               value={description}
               onChange={(event) => onDescriptionChange(event.target.value)}
+              required
+              minLength={2}
+              maxLength={100}
             />
           </FormGroup>
 
@@ -82,28 +86,22 @@ function TransactionModal({
                 id="value"
                 type="number"
                 placeholder="0,00"
-                min="0"
+                min="0.01"
                 step="0.01"
                 value={value}
                 onChange={(event) => onValueChange(event.target.value)}
+                required
               />
             </FormGroup>
 
             <FormGroup>
-              <label htmlFor="category">Categoria</label>
+              <label id="category-label">Categoria</label>
 
-              <select
-                id="category"
+              <CategorySelect
                 value={category}
-                onChange={(event) => onCategoryChange(event.target.value)}
-              >
-                <option value="">Selecione</option>
-                {categories.map((category) => (
-                  <option key={category} value={category}>
-                    {category}
-                  </option>
-                ))}
-              </select>
+                options={categories}
+                onChange={onCategoryChange}
+              />
             </FormGroup>
           </FormRow>
 

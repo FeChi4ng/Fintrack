@@ -54,8 +54,9 @@ export const TransactionsSection = styled.section`
   margin-top: 32px;
   padding: 24px;
 
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
+  background: ${({ theme }) => theme.colors.surface};
+  border: 1px solid ${({ theme }) => theme.colors.border};
+
   border-radius: 16px;
 
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
@@ -69,13 +70,13 @@ export const TransactionsHeader = styled.div`
   margin-bottom: 24px;
 
   h2 {
-    color: #111827;
+    color: ${({ theme }) => theme.colors.text};
     font-size: 20px;
   }
 
   p {
     margin-top: 4px;
-    color: #9ca3af;
+    color: ${({ theme }) => theme.colors.textSecondary};
     font-size: 14px;
   }
 
@@ -111,7 +112,7 @@ export const Transaction = styled.div`
 
   padding: 18px 0;
 
-  border-bottom: 1px solid #f3f4f6;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 
   &:last-child {
     border-bottom: 0;
@@ -141,8 +142,8 @@ export const TransactionIcon = styled.div`
 
   border-radius: 10px;
 
-  background: #eff6ff;
-  color: #2563eb;
+  background: ${({ theme }) => theme.colors.background};
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const TransactionDetails = styled.div`
@@ -157,12 +158,12 @@ export const TransactionDetails = styled.div`
   }
 
   strong {
-    color: #111827;
+    color: ${({ theme }) => theme.colors.text};
     font-size: 15px;
   }
 
   span {
-    color: #9ca3af;
+    color: ${({ theme }) => theme.colors.textSecondary};
     font-size: 13px;
   }
 `;
@@ -385,12 +386,12 @@ export const DeleteButton = styled.button`
   border-radius: 8px;
 
   background: transparent;
-  color: #9ca3af;
+  color: ${({ theme }) => theme.colors.textSecondary};
 
   transition: 0.2s;
 
   &:hover {
-    background: #fee2e2;
+    background: rgba(220, 38, 38, 0.12);
     color: #dc2626;
   }
 `;
@@ -407,13 +408,12 @@ export const EditButton = styled.button`
   border-radius: 8px;
 
   background: transparent;
-  color: #9ca3af;
-
+  color: ${({ theme }) => theme.colors.textSecondary};
   transition: 0.2s;
 
   &:hover {
-    background: #eff6ff;
-    color: #2563eb;
+    background: ${({ theme }) => theme.colors.background};
+    color: ${({ theme }) => theme.colors.primary};
   }
 `;
 
@@ -438,18 +438,18 @@ export const SearchInput = styled.input`
 
   padding: 0 14px;
 
-  border: 1px solid #d1d5db;
+  border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 10px;
 
-  background: #ffffff;
-  color: #111827;
+  background: ${({ theme }) => theme.colors.background};
+  color: ${({ theme }) => theme.colors.text};
 
   outline: none;
 
   transition: 0.2s;
 
   &::placeholder {
-    color: #9ca3af;
+    color: ${({ theme }) => theme.colors.textSecondary};
   }
 
   &:focus {
@@ -469,7 +469,10 @@ export const FilterButtons = styled.div`
 
   @media (max-width: 650px) {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+    width: 100%;
+    min-width: 0;
   }
 `;
 
@@ -480,25 +483,32 @@ type FilterButtonProps = {
 export const FilterButton = styled.button<FilterButtonProps>`
   padding: 10px 16px;
 
-  border: 1px solid ${({ $active }) => ($active ? "#2563eb" : "#d1d5db")};
+  border: 1px solid
+    ${({ $active, theme }) =>
+      $active ? theme.colors.primary : theme.colors.border};
 
   border-radius: 10px;
 
-  background: ${({ $active }) => ($active ? "#2563eb" : "#ffffff")};
+  background: ${({ $active, theme }) =>
+    $active ? theme.colors.primary : theme.colors.background};
 
-  color: ${({ $active }) => ($active ? "#ffffff" : "#6b7280")};
+  color: ${({ $active, theme }) => ($active ? "#ffffff" : theme.colors.text)};
 
   font-weight: 600;
 
   transition: 0.2s;
 
   &:hover {
-    border-color: #2563eb;
-    color: ${({ $active }) => ($active ? "#ffffff" : "#2563eb")};
+    border-color: ${({ theme }) => theme.colors.primary};
+    color: ${({ $active, theme }) =>
+      $active ? "#ffffff" : theme.colors.primary};
   }
 
   @media (max-width: 650px) {
     width: 100%;
+    min-width: 0;
+    padding: 10px 4px;
+    font-size: 12px;
   }
 `;
 
@@ -508,11 +518,11 @@ export const CategoryFilter = styled.select`
 
   padding: 0 14px;
 
-  border: 1px solid #d1d5db;
+  border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 10px;
 
-  background: #ffffff;
-  color: #6b7280;
+  background: ${({ theme }) => theme.colors.background};
+  color: ${({ theme }) => theme.colors.text};
 
   outline: none;
   cursor: pointer;

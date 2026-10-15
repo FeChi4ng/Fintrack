@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const LayoutContainer = styled.div`
   display: flex;
+  width: 100%;
+  min-width: 0;
   min-height: 100vh;
 `;
 

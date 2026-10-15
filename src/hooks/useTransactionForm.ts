@@ -53,6 +53,18 @@ export function useTransactionForm() {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
+    const parsedValue = Number(value);
+
+    if (
+      description.trim().length < 2 ||
+      !Number.isFinite(parsedValue) ||
+      parsedValue <= 0 ||
+      !category.trim()
+    ) {
+      alert("Preencha a descrição, o valor e a categoria corretamente.");
+      return;
+    }
+
     if (editingTransactionId !== null) {
       const transactionToUpdate = transactions.find(
         (transaction) => transaction.id === editingTransactionId

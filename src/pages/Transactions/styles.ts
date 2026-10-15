@@ -4,6 +4,10 @@ export const Container = styled.main`
   flex: 1;
   min-width: 0;
   padding: 32px;
+
+  @media (max-width: 768px) {
+    padding: 76px 20px 24px;
+  }
 `;
 
 export const Header = styled.header`
@@ -11,6 +15,12 @@ export const Header = styled.header`
   align-items: center;
   justify-content: space-between;
   gap: 24px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
 `;
 
 export const HeaderContent = styled.div`
@@ -18,7 +28,7 @@ export const HeaderContent = styled.div`
     display: block;
     margin-bottom: 4px;
 
-    color: #2563eb;
+    color: ${({ theme }) => theme.colors.primary};
     font-size: 14px;
     font-weight: 600;
   }
@@ -26,14 +36,14 @@ export const HeaderContent = styled.div`
   h1 {
     margin: 0;
 
-    color: #111827;
+    color: ${({ theme }) => theme.colors.text};
     font-size: 28px;
   }
 
   p {
     margin: 6px 0 0;
 
-    color: #6b7280;
+    color: ${({ theme }) => theme.colors.textSecondary};
     font-size: 14px;
   }
 `;
@@ -49,7 +59,7 @@ export const AddButton = styled.button`
   border: 0;
   border-radius: 10px;
 
-  background: #2563eb;
+  background: ${({ theme }) => theme.colors.primary};
   color: #ffffff;
 
   font-weight: 600;
@@ -58,6 +68,10 @@ export const AddButton = styled.button`
   transition: 0.2s;
 
   &:hover {
-    background: #1d4ed8;
+    filter: brightness(0.9);
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
   }
 `;

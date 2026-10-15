@@ -19,6 +19,8 @@ import {
   LegendColor,
 } from "./styles";
 
+import { useTheme } from "styled-components";
+
 type ExpenseCategoryChartProps = {
   transactions: TransactionType[];
 };
@@ -60,6 +62,8 @@ function ExpenseCategoryChart({ transactions }: ExpenseCategoryChartProps) {
     })
   );
 
+  const theme = useTheme();
+
   return (
     <ChartContainer>
       <ChartHeader>
@@ -93,7 +97,7 @@ function ExpenseCategoryChart({ transactions }: ExpenseCategoryChartProps) {
                         x={cx}
                         y={Number(cy) - 6}
                         textAnchor="middle"
-                        fill="#9ca3af"
+                        fill={theme.colors.textSecondary}
                         fontSize="12"
                       >
                         Total
@@ -103,7 +107,7 @@ function ExpenseCategoryChart({ transactions }: ExpenseCategoryChartProps) {
                         x={cx}
                         y={Number(cy) + 14}
                         textAnchor="middle"
-                        fill="#111827"
+                        fill={theme.colors.text}
                         fontSize="14"
                         fontWeight="700"
                       >
@@ -118,7 +122,24 @@ function ExpenseCategoryChart({ transactions }: ExpenseCategoryChartProps) {
               ))}
             </Pie>
 
-            <Tooltip formatter={(value) => formatCurrency(Number(value))} />
+            <Tooltip
+              formatter={(value) => formatCurrency(Number(value))}
+              contentStyle={{
+                backgroundColor: theme.colors.background,
+                border: `1px solid ${theme.colors.border}`,
+                borderRadius: "10px",
+                color: theme.colors.text,
+                boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
+              }}
+              labelStyle={{
+                color: theme.colors.text,
+                fontWeight: 600,
+              }}
+              itemStyle={{
+                color: theme.colors.text,
+                fontSize: "13px",
+              }}
+            />
           </PieChart>
         </ResponsiveContainer>
       </ChartContent>

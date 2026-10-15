@@ -9,6 +9,8 @@ import {
   YAxis,
 } from "recharts";
 
+import { useTheme } from "styled-components";
+
 import { ChartContainer, ChartHeader, ChartContent } from "./styles";
 
 type MonthlyData = {
@@ -22,6 +24,7 @@ type MonthlyEvolutionChartProps = {
 };
 
 function MonthlyEvolutionChart({ data }: MonthlyEvolutionChartProps) {
+  const theme = useTheme();
   return (
     <ChartContainer>
       <ChartHeader>
@@ -35,12 +38,18 @@ function MonthlyEvolutionChart({ data }: MonthlyEvolutionChartProps) {
             data={data}
             margin={{ top: 10, right: 10, left: 0, bottom: 5 }}
           >
-            <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+            <CartesianGrid strokeDasharray="3 3" stroke={theme.colors.border} />
 
-            <XAxis dataKey="month" tick={{ fontSize: 12 }} />
+            <XAxis
+              dataKey="month"
+              tick={{
+                fontSize: 12,
+                fill: theme.colors.textSecondary,
+              }}
+            />
 
             <YAxis
-              tick={{ fontSize: 12 }}
+              tick={{ fontSize: 12, fill: theme.colors.textSecondary }}
               width={55}
               tickFormatter={(value: number) =>
                 `R$ ${value.toLocaleString("pt-BR")}`
@@ -48,6 +57,19 @@ function MonthlyEvolutionChart({ data }: MonthlyEvolutionChartProps) {
             />
 
             <Tooltip
+              contentStyle={{
+                backgroundColor: theme.colors.surface,
+                border: `1px solid ${theme.colors.border}`,
+                borderRadius: "10px",
+                color: theme.colors.text,
+              }}
+              labelStyle={{
+                color: theme.colors.text,
+                fontWeight: 600,
+              }}
+              itemStyle={{
+                color: theme.colors.text,
+              }}
               formatter={(value) =>
                 `R$ ${Number(value).toLocaleString("pt-BR", {
                   minimumFractionDigits: 2,
@@ -56,7 +78,13 @@ function MonthlyEvolutionChart({ data }: MonthlyEvolutionChartProps) {
               }
             />
 
-            <Legend />
+            <Legend
+              formatter={(value) => (
+                <span style={{ color: theme.colors.textSecondary }}>
+                  {value}
+                </span>
+              )}
+            />
 
             <Line
               type="monotone"
