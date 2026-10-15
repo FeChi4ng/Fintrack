@@ -77,7 +77,7 @@ As capturas de tela do Dashboard, das transações e dos relatórios serão adic
 
 ## 🌐 Demonstração
 
-O link da aplicação publicada será adicionado após o deploy.
+https://fintrack-eight-sooty.vercel.app/
 
 ## 📌 Sobre o projeto
 
